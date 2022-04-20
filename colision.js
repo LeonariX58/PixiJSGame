@@ -12,8 +12,7 @@ function detectCollisions() {
         obj1 = gameObjects[i]
         for (let j = i + 1; j < gameObjects.length; j++) {
             obj2 = gameObjects[j]
-
-            if (rectIntersect(obj1.x, obj1.y, obj1.width, obj1.height, obj2.x, obj2.y, obj2.width, obj2.height)) {
+            if (rectIntersect(obj1.x, obj1.y, obj1.width, obj1.height, obj2.x, obj2.y, obj2.width, obj2.height).colliding) {
                 obj1.isColliding = true;
                 obj2.isColliding = true;
             } else {
@@ -25,10 +24,31 @@ function detectCollisions() {
 }
 
 function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
-    if (x2 > w1 + x1 || x1 > w2 + x2 || y2 > h1 + y1 || y1 > h2 + y2){
-        return false;
+
+    let side
+    let colliding = true
+    if (x2 > w1 + x1) {
+        side = 'right'
+        colliding = false
     }
-    return true;
+    if (x1 > w2 + x2)  {
+       side = 'left' 
+       colliding = false
+    }
+    if (y2 > h1 + y1) {
+        side = 'bottom'
+        colliding = false
+    }
+    if (y1 > h2 + y2) {
+        side = 'top'
+        colliding = false
+    }
+
+    
+    return {
+        colliding: colliding,
+        side: side
+    }
 }
 
 export {rectIntersect, detectCollisions}

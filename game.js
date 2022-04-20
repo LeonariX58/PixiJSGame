@@ -8,7 +8,7 @@ function playClick() {
     gameObjects[0].position.set((app.screen.width) / 2, (app.screen.height) / 2)
     gameObjects[0].width = 100
     gameObjects[0].height = 100
-    gameObjects[0].tint = '0x00FF00'
+    gameObjects[0].tint = '0xFFFFFF'
 
 
     gameObjects[1].position.set((app.screen.width) / 2 - 400, (app.screen.height) / 2)
@@ -27,12 +27,19 @@ function makePlayerMove(player) {
         console.log(player.isColliding)
 
         if (keyName === 'a') {
+            if (rectIntersect(player.x - 5, player.y, player.width, player.height, gameObjects[1].x, gameObjects[1].y, gameObjects[1].width, gameObjects[1].height).colliding == true && rectIntersect(player.x, player.y, player.width, player.height, gameObjects[1].x, gameObjects[1].y, gameObjects[1].width, gameObjects[1].height).side == 'left') return
             player.position.set(player.x - 5, player.y)
-        } else if (keyName === 'w') {
+        } 
+        if (keyName === 'w') {
+            if (rectIntersect(player.x, player.y - 5, player.width, player.height, gameObjects[1].x, gameObjects[1].y, gameObjects[1].width, gameObjects[1].height).colliding == true && rectIntersect(player.x, player.y, player.width, player.height, gameObjects[1].x, gameObjects[1].y, gameObjects[1].width, gameObjects[1].height).side == 'top') return
             player.position.set(player.x, player.y - 5)
-        } else if (keyName === 'd') {
+        }
+        if (keyName === 'd') {
+            if (rectIntersect(player.x + 5, player.y, player.width, player.height, gameObjects[1].x, gameObjects[1].y, gameObjects[1].width, gameObjects[1].height).colliding == true && rectIntersect(player.x, player.y, player.width, player.height, gameObjects[1].x, gameObjects[1].y, gameObjects[1].width, gameObjects[1].height).side == 'right') return
             player.position.set(player.x + 5, player.y)
-        } else if (keyName === 's') {
+        }
+        if (keyName === 's') {
+            if (rectIntersect(player.x, player.y + 5, player.width, player.height, gameObjects[1].x, gameObjects[1].y, gameObjects[1].width, gameObjects[1].height).colliding == true && rectIntersect(player.x, player.y, player.width, player.height, gameObjects[1].x, gameObjects[1].y, gameObjects[1].width, gameObjects[1].height).side == 'bottom') return
             player.position.set(player.x, player.y + 5)
         }
         
